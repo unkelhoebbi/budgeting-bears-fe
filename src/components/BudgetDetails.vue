@@ -1,25 +1,19 @@
 <template>
-    <div class="top-info">
-        <nav class="navbar navbar-light navbar-expand-md">
-            <div v-on:click="show = !show" class="container-fluid">
-                <img class="align-content-center my-auto" src='~@/assets/svg_white_head.svg' style="width: 50px;">
-                <img src='~@/assets/svg_white_budgetingBears_text.svg' style="width: 120px;">
-                <button v-on:click="isHidden = !isHidden">Toggle hide and show</button>
-
-                <h1 v-if="!isHidden">Hide me on click event!</h1>
-            </div>
-        </nav>
+    <p class="top-info-collapse">
+        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Expense details
+        </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "BudgetDetails",
-        data() {
-            return {
-                isHidden: true
-            }
-        }
+        name: "BudgetDetails"
     }
 </script>
 
@@ -29,11 +23,10 @@
         box-shadow: 0px 0px 7px #264653;
         font-family: Taz;
         color: #ffffff;
-        width: 90%;
-        margin-right: 5%;
-        margin-left: 5%;
-        margin-top: 5%;
-        border-radius: 6px;
-        height: 85px;
+        height: 65px;
+    }
+
+    .top-info-collapse {
+        text-align: center;
     }
 </style>
