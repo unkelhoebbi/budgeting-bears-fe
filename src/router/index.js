@@ -10,7 +10,7 @@ const routes = [
   },
   {
     path: '/level',
-    name: 'Level',
+    name: 'Level-details',
     component: Level
   }
 ]

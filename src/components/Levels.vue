@@ -1,7 +1,10 @@
 <template>
     <div>
-        <div v-for="item in levels" v-bind:key="item.level1Name">
-            <router-link to="/level" class="btn btn-primary level-item" :style="{'background-color': item.color}">{{ item.level1Name }}</router-link>
+        <div class="col-12" v-for="item in levels" v-bind:key="item.level1Name">
+            <div class="level" :style="{'background-color': item.color}">
+                <router-link class="level-item-name" to="/level">{{ item.level1Name }}</router-link>
+                <div class="percentage" :style="{'width': item.ratio}"></div>
+            </div>
         </div>
     </div>
 </template>
@@ -16,8 +19,7 @@
         },
         data() {
             return {
-                levels: [],
-
+                levels: []
             }
         },
         // Life cycle hook that calls axios
@@ -36,28 +38,69 @@
             ]
             axios.get('https://blazor1291.azurewebsites.net/sgdata').then(response => {
                 console.log(response.data)
+                let options = {style: "currency", currency: "CHF"}
+
                 let api_levels = response.data
+
+                const max = api_levels.reduce(
+                    (max, item) => (item.cost2019 > max ? item.cost2019 : max),
+                    api_levels[0].cost2019
+                );
+
+                console.log(max)
+
                 let counter = 0
-                this.levels = api_levels.map(function (item) {
-                    item.color = colors[counter++]
-                    return item
-                })
+                this.levels = api_levels
+                    .sort(function (a, b) {
+                        return b.cost2019 - a.cost2019
+                    })
+                    .map(function (item) {
+                        item.color = colors[counter++]
+                        let ratio = parseFloat(item.cost2019) / parseFloat(max) * 100
+                        item.cost2019 = Intl.NumberFormat("de-CH", options).format(item.cost2019)
+                        item.ratio = ratio.toString() + '%'
+                        return item
+                    })
             })
         }
     }
 </script>
 
 <style scoped>
-    .level-item {
-        width: 90%;
-        margin-right: 5%;
-        margin-left: 5%;
-        margin-top: 5%;
+    .percentage {
         border-radius: 6px;
         border-width: 0px;
         border-style: none;
-        height: 65px;
-        text-align: left;
+        text-align: right;
         font-family: Taz;
+        height: 10px;
+        background: rgba(255, 255, 255, 0.32);
     }
+
+    .level {
+        width: 90%;
+        margin-right: 4%;
+        margin-left: 5%;
+        margin-top: 3%;
+        border-radius: 6px;
+        border-width: 0px;
+        border-style: none;
+        text-align: right;
+        font-family: Taz;
+        height: 65px;
+        background: #327454;
+        box-shadow: 0px 0px 7px #347857;
+        text-align: left;
+        line-height: 35px;
+    }
+
+    .level-item-name {
+        color: white;
+        font-family: Taz;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 55px;
+        padding-left: 15px;
+    }
+
 </style>

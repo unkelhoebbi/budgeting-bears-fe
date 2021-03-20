@@ -1,16 +1,15 @@
 <template>
     <div class="about">
-        <h1>This is an about page</h1>
+        <Level/>
     </div>
 </template>
 
 
 <script>
-
-    import Level from '@/components/Level';
+    import Level from '@/components/Level.vue';
 
     export default {
-        name: 'Level',
+        name: 'Level-details',
         components: {
             Level
         },
