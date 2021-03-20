@@ -1,9 +1,15 @@
 <template>
-    <div id="nav">
-        <router-link to="/level">Level</router-link>
-    </div>
+    <BudgetDetails/>
     <router-view/>
 </template>
+<script>
+    import BudgetDetails from "./components/BudgetDetails";
+    export default {
+        components: {
+            BudgetDetails
+        }
+    }
+</script>
 <style>
     #app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
