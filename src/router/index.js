@@ -9,7 +9,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/level',
+    path: '/level/:id',
     name: 'Level-details',
     component: Level
   }

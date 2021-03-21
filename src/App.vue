@@ -11,7 +11,9 @@
     }
 </script>
 <style>
-
+    * {
+        font-family: Taz;
+    }
     #nav a {
         font-weight: bold;
         color: #2c3e50;

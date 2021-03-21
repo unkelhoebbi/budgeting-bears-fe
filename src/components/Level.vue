@@ -1,8 +1,9 @@
 <template>
     <h1 class="level-title">{{levelTitle}}</h1>
-    <p class="top-info-collapse">
-        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Propose your idea
+    <p></p>
+    <p class="propose-show-text top-info-collapse">
+        <a class="proposal-text" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Tell us your idea
         </a>
     </p>
     <div class="collapse" id="collapseExample">
@@ -11,14 +12,13 @@
                 <div class="form-group">
                     <label for="formGroupExampleInput">Title</label>
                     <input v-model="title" type="text" class="form-control" id="formGroupExampleInput"
-                           placeholder="Example input">
+                           placeholder="Legalize it">
                 </div>
                 <div class="form-group">
-                    <label for="formGroupExampleInput2">Description</label>
-                    <input v-model="description" type="text" class="form-control" id="formGroupExampleInput2"
-                           placeholder="Another input">
+                    <label for="exampleFormControlTextarea1">Description</label>
+                    <textarea v-model="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
-                <button v-on:click="publish" class="proposal-btn btn btn-primary">Publish</button>
+                <button v-on:click="publish" class="proposal-btn btn btn-primary">Send prompt</button>
             </form>
         </div>
     </div>
@@ -62,7 +62,7 @@
         methods: {
             publish: function () {
                 const proposal = {
-                    "Level1Name": "1 Public Safety",
+                    "Level1Name": "2 education",
                     "Title": this.title,
                     "Text": this.description
                 }
@@ -70,8 +70,19 @@
                     .then(
                         response => {
                             console.log(response)
+                            let id = 'bb6e53c9-457a-4226-2564-08d8eb33da43'
+
+                            axios.get('https://blazor1291.azurewebsites.net/sgdata/level/' + id).then(response => {
+                                console.log(response.data.comments)
+                                this.proposals = response.data.comments.map(function (comment) {
+                                    comment.hasLike = false
+                                    comment.count = Math.round(Math.random() * 10000)
+                                    return comment
+                                })
+                            })
                         }
                     )
+
             },
             add: function (proposal) {
                 if (proposal.hasLike) {
@@ -83,7 +94,7 @@
             }
         },
         mounted() {
-            let id = '1eaf7d6f-bff8-4b46-2563-08d8eb33da43'
+            let id = this.$route.params.id
 
             axios.get('https://blazor1291.azurewebsites.net/sgdata/level/' + id).then(response => {
                 console.log(response.data.comments)
@@ -119,6 +130,8 @@
 
     .level-title {
         text-align: center;
+        font-size: 32px;
+        margin-top: 30px;
     }
 
     .icon {
@@ -137,10 +150,24 @@
     }
 
     .proposal-btn {
-        background: #263653;
+        background: #264653;
     }
 
     .propose-show-text {
         text-align: center;
+        height: 65px;
+        padding-top: 15px;
+    }
+
+    .collapse {
+        margin-bottom: 25px;
+    }
+
+    .proposal-text {
+        color: white;
+        background: #264653;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 15px;
     }
 </style>

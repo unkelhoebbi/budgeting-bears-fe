@@ -2,7 +2,7 @@
     <div>
         <div class="col-12" v-for="item in levels" v-bind:key="item.level1Name">
             <div class="level" :style="{'background-color': item.color}">
-                <router-link class="level-item-name" to="/level">{{ item.level1Name }}</router-link>
+                <router-link class="level-item-name" :to="{ name: 'Level-details', params: { id: item.postId }}">{{ item.level1Name }}</router-link>
                 <div class="percentage" :style="{'width': item.ratio}"></div>
             </div>
         </div>
