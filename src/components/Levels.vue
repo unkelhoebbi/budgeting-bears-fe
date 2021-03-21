@@ -56,6 +56,9 @@
                     })
                     .map(function (item) {
                         item.color = colors[counter++]
+                        if (item.postId == '2c10973b-5709-441d-2562-08d8eb33da43') {
+                            item.level1Name = '0 citizenship, authorities'
+                        }
                         let ratio = parseFloat(item.cost2019) / parseFloat(max) * 100
                         item.cost2019 = Intl.NumberFormat("de-CH", options).format(item.cost2019)
                         item.ratio = ratio.toString() + '%'

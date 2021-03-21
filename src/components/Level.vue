@@ -1,6 +1,6 @@
 <template>
     <h1 class="level-title">{{levelTitle}}</h1>
-    <p></p>
+    <p class="intro">Spatial planning systems refer to the methods and approaches used by the public and private sector to influence the distribution of people and activities in spaces of various scales.</p>
     <p class="propose-show-text top-info-collapse">
         <a class="proposal-text" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
             Tell us your idea
@@ -62,7 +62,7 @@
         methods: {
             publish: function () {
                 const proposal = {
-                    "Level1Name": "2 education",
+                    "Level1Name": "7 Environment and spatial planning",
                     "Title": this.title,
                     "Text": this.description
                 }
@@ -70,16 +70,6 @@
                     .then(
                         response => {
                             console.log(response)
-                            let id = 'bb6e53c9-457a-4226-2564-08d8eb33da43'
-
-                            axios.get('https://blazor1291.azurewebsites.net/sgdata/level/' + id).then(response => {
-                                console.log(response.data.comments)
-                                this.proposals = response.data.comments.map(function (comment) {
-                                    comment.hasLike = false
-                                    comment.count = Math.round(Math.random() * 10000)
-                                    return comment
-                                })
-                            })
                         }
                     )
 
@@ -94,7 +84,7 @@
             }
         },
         mounted() {
-            let id = this.$route.params.id
+            let id = 'd4766d95-6523-422c-2569-08d8eb33da43'
 
             axios.get('https://blazor1291.azurewebsites.net/sgdata/level/' + id).then(response => {
                 console.log(response.data.comments)
@@ -129,9 +119,10 @@
     }
 
     .level-title {
-        text-align: center;
+        text-align: left;
         font-size: 32px;
         margin-top: 30px;
+        margin-left: 15px;
     }
 
     .icon {
@@ -154,9 +145,10 @@
     }
 
     .propose-show-text {
-        text-align: center;
+        text-align: left;
         height: 65px;
         padding-top: 15px;
+        margin-left: 15px;
     }
 
     .collapse {
@@ -169,5 +161,10 @@
         padding: 10px;
         border-radius: 5px;
         margin-top: 15px;
+    }
+
+    .intro {
+        margin-left: 15px;
+        margin-right: 15px;
     }
 </style>
