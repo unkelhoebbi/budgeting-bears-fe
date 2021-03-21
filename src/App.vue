@@ -3,12 +3,10 @@
     <router-view/>
 </template>
 <script>
-    import BudgetDetails from "./components/BudgetDetails";
     import Navigation from "./components/Navigation";
     export default {
         components: {
             Navigation,
-            BudgetDetails
         }
     }
 </script>
